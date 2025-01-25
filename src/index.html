@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>زيّن صورتك بعلم سوريا</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>زيّن صورتك بعلم سوريا</h1>
+        <div class="upload-btn-wrapper">
+            <button class="btn" type="button" onclick="document.getElementById('fileInput').click();">ارفع صورتك</button>
+            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+        </div>
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <div class="slider-container">
+            <label for="ringWidth">عرض الدوائر:</label>
+            <input type="range" id="ringWidth" min="10" max="50" value="20">
+        </div>
+        <div class="slider-container">
+            <label for="starRotation">تموضع النجوم:</label>
+            <input type="range" id="starRotation" min="0" max="360" value="0">
+        </div>
+        <div class="slider-container">
+            <label for="colorScheme">كوّع</label>
+            <label class="switch">
+                <input type="checkbox" id="colorScheme">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <button id="downloadBtn" class="btn">تحميل الصورة</button>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
