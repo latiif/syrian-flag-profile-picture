@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('fileInput');
     const ringWidthSlider = document.getElementById('ringWidth');
     const starRotationSlider = document.getElementById('starRotation');
-    const colorSchemeSwitch = document.getElementById('colorScheme');
     const downloadBtn = document.getElementById('downloadBtn');
     let currentImage = null;
 
@@ -12,13 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.beginPath();
         ctx.save();
         ctx.translate(x, y);
-        
+
         // Draw 5-pointed star
         for (let i = 0; i < 5; i++) {
             ctx.lineTo(Math.cos((18 + i * 72) * Math.PI / 180) * size,
-                       Math.sin((18 + i * 72) * Math.PI / 180) * size);
-            ctx.lineTo(Math.cos((54 + i * 72) * Math.PI / 180) * (size/2),
-                       Math.sin((54 + i * 72) * Math.PI / 180) * (size/2));
+                Math.sin((18 + i * 72) * Math.PI / 180) * size);
+            ctx.lineTo(Math.cos((54 + i * 72) * Math.PI / 180) * (size / 2),
+                Math.sin((54 + i * 72) * Math.PI / 180) * (size / 2));
         }
         ctx.closePath();
         ctx.fillStyle = color;
@@ -35,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const scale = Math.min(200 / img.width, 200 / img.height);
             const width = img.width * scale;
             const height = img.height * scale;
-            ctx.drawImage(img, 
+            ctx.drawImage(img,
                 (canvas.width - width) / 2,
                 (canvas.height - height) / 2,
                 width, height);
@@ -43,17 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
-        
+
         // Calculate radii (outer ring starts at 140)
         const outerRadius = 140;
         const middleRadius = outerRadius - ringWidth;
         const innerRadius = middleRadius - ringWidth;
-        
+
         // Determine ring colors based on switch
-        const outerColor = colorSchemeSwitch.checked ? 'green' : 'red';
+        const outerColor = 'green';
         const middleColor = 'white';
         const innerColor = 'black';
-        
+
         // Draw rings from outer to inner
         ctx.lineWidth = ringWidth;
 
@@ -74,8 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const starRadius = middleRadius; // Place stars on middle ring
         const baseAngle = (starRotation * Math.PI) / 180; // Convert degrees to radians
 
-        const starCount = colorSchemeSwitch.checked ? 3 : 2;
-        const starColor = colorSchemeSwitch.checked ? 'red' : 'green';
+        const starCount = 3;
+        const starColor = 'red';
 
         for (let i = 0; i < starCount; i++) {
             const angle = baseAngle + (i * (360 / starCount)) * Math.PI / 180;
@@ -91,14 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.stroke();
     }
 
-    fileInput.addEventListener('change', function(e) {
+    fileInput.addEventListener('change', function (e) {
         const file = e.target.files[0];
         if (!file) return;
 
         const reader = new FileReader();
-        reader.onload = function(event) {
+        reader.onload = function (event) {
             const img = new Image();
-            img.onload = function() {
+            img.onload = function () {
                 currentImage = img;
                 drawRings(currentImage, ringWidthSlider.value, starRotationSlider.value);
             };
@@ -107,19 +106,16 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.readAsDataURL(file);
     });
 
-    ringWidthSlider.addEventListener('input', function() {
+    ringWidthSlider.addEventListener('input', function () {
         drawRings(currentImage, this.value, starRotationSlider.value);
     });
 
-    starRotationSlider.addEventListener('input', function() {
+    starRotationSlider.addEventListener('input', function () {
         drawRings(currentImage, ringWidthSlider.value, this.value);
     });
 
-    colorSchemeSwitch.addEventListener('change', function() {
-        drawRings(currentImage, ringWidthSlider.value, starRotationSlider.value);
-    });
 
-    downloadBtn.addEventListener('click', function() {
+    downloadBtn.addEventListener('click', function () {
         const link = document.createElement('a');
         link.download = 'profile-image.png';
         link.href = canvas.toDataURL('image/png');
