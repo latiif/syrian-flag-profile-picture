@@ -277,3 +277,21 @@ input:checked + .slider:before {
         font-size: 24px;
     }
 }
+
+/* Footer Styling */
+.footer {
+  color: #f8f8f7;  /* Light gray background similar to Apple's footer */
+  background-color: #6e6e6e;            /* Slightly dark gray text color */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Apple-like font */
+  text-align: center;
+  padding: 5px 0;           /* Padding for spacing */
+  font-size: 12px;           /* A smaller font size to keep it subtle */
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);  /* Subtle shadow at the top */
+}
+
+footer {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+}
